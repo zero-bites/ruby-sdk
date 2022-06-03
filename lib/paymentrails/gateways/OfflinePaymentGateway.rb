@@ -15,8 +15,8 @@ module PaymentRails
     end
 
     def update(recipient_id, offline_payment_id, body)
-      @client.patch('/v1/recipients/' + recipient_id + '/offlinePayments/' + offline_payment_id, body)
-      true
+      response = @client.patch('/v1/recipients/' + recipient_id + '/offlinePayments/' + offline_payment_id, body)
+      offline_payment_builder(response)
     end
 
     def delete(recipient_id, offline_payment_id)

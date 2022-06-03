@@ -15,8 +15,9 @@ module PaymentRails
     end
 
     def update(body)
-      @client.post('/v1/invoices/payment/update', body)
-      true
+      response = @client.post('/v1/invoices/payment/update', body)
+      p response
+      invoice_payment_builder(response)
     end
 
     def delete(body)
