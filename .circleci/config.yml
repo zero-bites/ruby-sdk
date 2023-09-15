@@ -29,13 +29,11 @@ jobs:
       - run:
           name: Publish to RubyGems
           command: |
-              echo $HOME
-              echo "---\n:rubygems_api_key: ${RUBYGEMS_AUTH_TOKEN}\n"
               mkdir -p ~/.gem
               touch ~/.gem/credentials
               chmod 0600 ~/.gem/credentials
               printf -- "---\n:rubygems_api_key: ${RUBYGEMS_AUTH_TOKEN}\n" > ~/.gem/credentials
-              gem env --config-file ~/.gem/credentials
+              gem env
               gem build *.gemspec
               gem push *.gem
           environment:
