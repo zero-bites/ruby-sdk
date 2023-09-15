@@ -33,7 +33,7 @@ jobs:
               touch ~/.gem/credentials
               chmod 0600 ~/.gem/credentials
               printf -- "---\n:rubygems_api_key: ${RUBYGEMS_AUTH_TOKEN}\n" > ~/.gem/credentials
-              gem env
+              gem env --config-file ~/.gem/credentials
               gem build *.gemspec
               gem push *.gem
           environment:
