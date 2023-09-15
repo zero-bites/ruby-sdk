@@ -33,7 +33,6 @@ jobs:
               touch ~/.gem/credentials
               chmod 0600 ~/.gem/credentials
               printf -- "---\n:rubygems_api_key: ${RUBYGEMS_API_KEY}\n" > ~/.gem/credentials
-              cat ~/.gem/credentials
               gem build *.gemspec
               gem push *.gem -v
 workflows:
