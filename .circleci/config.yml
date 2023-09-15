@@ -2,7 +2,7 @@ version: 2.1
 
 executors:
   default:
-    working_directory: ~/
+    working_directory: ~/sdk
     docker:
       - image: cimg/ruby:2.7
 
@@ -33,12 +33,9 @@ jobs:
               touch ~/.gem/credentials
               chmod 0600 ~/.gem/credentials
               printf -- "---\n:rubygems_api_key: ${RUBYGEMS_API_KEY}\n" > ~/.gem/credentials
+              cat ~/.gem/credentials
               gem build *.gemspec
-              export RUBYGEMS_API_KEY=${RUBYGEMS_API_KEY}
               gem push *.gem -v
-          environment:
-            RUBYGEMS_API_KEY: $RUBYGEMS_AUTH_TOKEN
-
 workflows:
   build_and_test:
     jobs:
