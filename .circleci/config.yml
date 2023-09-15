@@ -34,7 +34,7 @@ jobs:
               chmod 0600 ~/.gem/credentials
               printf -- "---\n:rubygems_api_key: ${RUBYGEMS_AUTH_TOKEN}\n" > ~/.gem/credentials
               gem build *.gemspec
-              gem push *.gem --config-file ~/.gem/credentials --norc 
+              gem push *.gem --config-file ~/.gem/credentials --norc -v
           environment:
             GEM_HOST_API_KEY: $RUBYGEMS_AUTH_TOKEN
 
