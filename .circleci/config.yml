@@ -27,13 +27,18 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Set up RubyGems credentials
-          command: echo -e "---\n:rubygems_api_key: $RUBYGEMS_AUTH_TOKEN" > ~/.gem/credentials && chmod 0600 ~/.gem/credentials
-      - run:
-          name: Build and push RubyGem
+          name: Publish to RubyGems
           command: |
-            gem build *.gemspec
-            gem push *.gem
+              echo $HOME
+              echo "---\n:rubygems_api_key: ${RUBYGEMS_AUTH_TOKEN}\n"
+              mkdir -p ~/.gem
+              touch ~/.gem/credentials
+              chmod 0600 ~/.gem/credentials
+              printf -- "---\n:rubygems_api_key: ${RUBYGEMS_AUTH_TOKEN}\n" > ~/.gem/credentials
+              gem build *.gemspec
+              gem push *.gem
+          environment:
+            GEM_HOST_API_KEY: $RUBYGEMS_AUTH_TOKEN
 
 workflows:
   build_and_test:
